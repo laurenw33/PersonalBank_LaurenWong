@@ -22,7 +22,7 @@ public class Runner {
             String access = s.nextLine();
             if (usernames.length = 0)
             {
-
+                return username;
             }
         }
 

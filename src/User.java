@@ -3,35 +3,45 @@ public class User {
     private int balance = 0;
     private String username;
     private int pin;
-    String[] usernames = {};
-    int[] pins = {};
+    String[] userList = {};
+    int[] pinList = {};
 
-    public User()
+
+    public User(String username, int pin)
     {
-
+        this.username = username;
+        this.pin = pin;
+        pinList = new int[]{pin};
+        userList = new String[]{username};
     }
-    public String createUsername(String user)
+    public String getUsername(String user)
     {
         username = user;
         return username;
     }
 
-    public int createPin(int pinNew)
+    public int getPin(int pinNew)
     {
         pin = pinNew;
         return pin;
     }
 
-    public boolean checkPinLen(int pinLen)
+    public boolean verifyUser(String user)
     {
-        if (pinLen == 4)
+        int len = userList.length;
+        if (len == 0)
         {
-            pins = new int[]{pin};
-            System.out.print("Account created successfully with username: " + username);
+            return false;
         }
-        else if (pinLen != 4)
+        else if (len >= 1)
         {
-            System.out.println("Error! Please enter a four-digit pin.");
+            for (int i = 1; i <= len; i++)
+            {
+                if (userList[i] == user)
+                {
+                    return true;
+                }
+            }
         }
         return true;
     }
@@ -41,14 +51,15 @@ public class User {
     }
 
 
-    public String depositMoney(int deposit)
+    public String deposit(int deposit)
     {
         balance += deposit;
         return "Your balance after depositing " + deposit + " dollars is: " + balance;
     }
 
-    public String withdrawMoney(int withdraw, int enteredPin)
+    public String withdraw(int withdraw, int enteredPin)
     {
+
         if (verifyPin(enteredPin)) {
             if (withdraw <= balance) {
                 balance -= withdraw;

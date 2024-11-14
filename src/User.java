@@ -20,30 +20,14 @@ public class User {
         return username;
     }
 
-    public int getPin(int pinNew)
+    public void getPin(int pinNew)
     {
         pin = pinNew;
-        return pin;
     }
 
     public boolean verifyUser(String user)
     {
-        int len = userList.length;
-        if (len == 0)
-        {
-            return false;
-        }
-        else if (len >= 1)
-        {
-            for (int i = 1; i <= len; i++)
-            {
-                if (userList[i] == user)
-                {
-                    return true;
-                }
-            }
-        }
-        return true;
+        return username.equals(user);
     }
 
     private boolean verifyPin(int enteredPin) {
@@ -51,10 +35,16 @@ public class User {
     }
 
 
-    public String deposit(int deposit)
+    public String deposit(int deposit, int enteredPin)
     {
-        balance += deposit;
-        return "Your balance after depositing " + deposit + " dollars is: " + balance;
+        if (verifyPin(enteredPin)) {
+            balance += deposit;
+            return "Your balance after depositing " + deposit + " dollars is: " + balance;
+        }
+
+        else {
+            return "Incorrect pin. Access denied.";
+        }
     }
 
     public String withdraw(int withdraw, int enteredPin)
@@ -64,7 +54,9 @@ public class User {
             if (withdraw <= balance) {
                 balance -= withdraw;
                 return "Your balance after withdrawing " + withdraw + " dollars is: " + balance;
-            } else {
+            }
+
+            else {
                 return "Insufficient balance. Your current balance is: " + balance;
             }
         }
@@ -74,11 +66,13 @@ public class User {
         }
     }
 
-    public String checkBalance(int enteredPin)
+    public String balance(int enteredPin)
     {
         if (verifyPin(enteredPin)) {
             return "Your balance is: " + balance;
-        } else {
+        }
+
+        else {
             return "Incorrect pin. Access denied.";
         }
 

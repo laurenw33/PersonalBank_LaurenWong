@@ -30,7 +30,7 @@ public class User {
         return username.equals(user);
     }
 
-    private boolean verifyPin(int enteredPin) {
+    public boolean verifyPin(int enteredPin) {
         return pin == enteredPin;
     }
 

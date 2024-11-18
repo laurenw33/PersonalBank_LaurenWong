@@ -9,7 +9,13 @@ public class Runner {
 
         System.out.println("Welcome to your personal banking system!");
         System.out.println("Please follow the steps below to create an account!");
-
+        System.out.println("----------------------------------------------------");
+        System.out.println("!! IMPORTANT INFO !!");
+        System.out.println("Admin username: admin1");
+        System.out.println("Admin password: 8976");
+        System.out.println("Please create an easy to remember username!");
+        System.out.println("REMEMBER: Your pin can only be four-digits long!");
+        System.out.println("----------------------------------------------------");
         System.out.print("Please enter a username: ");
         String user = s.nextLine();
 
@@ -35,12 +41,24 @@ public class Runner {
 
         if (mode.equalsIgnoreCase("admin"))
         {
-            while (true) {
+            System.out.print("Please enter the admin username: ");
+            String admin = s.nextLine();
+            boolean adminVer = admin1.verifyAdmin(admin);
+
+            System.out.println("Please enter the admin pin: ");
+            String adminPin = s.nextLine();
+            boolean pinVer = admin1.verifyPin(Integer.parseInt(adminPin));
+
+            boolean verify = pinVer && adminVer;
+
+            while (verify) {
                 System.out.print("What would you like to do? Update pin, update balance, or delete account?");
                 String answer = s.nextLine();
 
+
                 if (answer.equalsIgnoreCase("update pin"))
                 {
+
 
                 }
 
@@ -118,9 +136,12 @@ public class Runner {
                     System.out.println("Thank you for using the banking system. Goodbye!");
                     break;
                 }
+                System.out.println("----------------------------------------------------");
+                s.nextLine();
             }
 
             s.nextLine();
+            s.close();
 
         }
     }

@@ -1,15 +1,17 @@
 public class Admin {
-    private String username;
-    private int pin;
+    private String username = "admin1";
+    private int pin = 8976;
 
-    public Admin(String user, int pinNum) {
-        username = user;
-        pin = pinNum;
-
+    public Admin() {
     }
 
-    public void deleteAccount() {
+    public boolean verifyAdmin(String admin)
+    {
+        return username.equals(admin);
+    }
 
+    public boolean verifyPin(int enteredPin) {
+        return pin == enteredPin;
     }
 
     public void updateBalance() {

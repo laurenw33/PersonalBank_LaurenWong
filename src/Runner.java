@@ -15,7 +15,7 @@ public class Runner {
         System.out.println("Admin password: 8976");
         System.out.println("Please create an easy to remember username!");
         System.out.println("REMEMBER: Your pin can only be four-digits long!");
-        System.out.println("----------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
         System.out.print("Please enter a username: ");
         String user = s.nextLine();
 

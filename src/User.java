@@ -1,11 +1,9 @@
-public class User {
+import java.util.ArrayList;
 
+public class User {
     private int balance = 0;
     private String username;
     private int pin;
-    String[] userList = {};
-    int[] pinList = {};
-
 
     public User(String username, int pin) {
         if (String.valueOf(pin).length() == 4) {
@@ -15,14 +13,18 @@ public class User {
         }
     }
 
-    public String getUsername(String user)
-    {
-        username = user;
-        return username;
+    public static User findUser(ArrayList<User> users, String username) {
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        return null;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getUsername()
+    {
+        return username;
     }
 
     public void setPin(int pin) {

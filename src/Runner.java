@@ -58,18 +58,30 @@ public class Runner {
 
                 if (answer.equalsIgnoreCase("update pin"))
                 {
-
-
-                }
-
-                if (answer.equalsIgnoreCase("update balance"))
-                {
+                    System.out.print("Enter the new pin for the user: ");
+                    int newPin = s.nextInt();
+                    s.nextLine();
+                    admin1.updatePin(account1, newPin);
 
                 }
 
-                if (answer.equalsIgnoreCase("delete account"))
+                else if (answer.equalsIgnoreCase("update balance"))
                 {
+                    System.out.print("Enter the new balance for the user: ");
+                    int newBalance = s.nextInt();
+                    s.nextLine();
+                    admin1.updateBalance(account1, newBalance);
+                }
 
+                else if (answer.equalsIgnoreCase("delete account"))
+                {
+                    account1 = null;
+                    System.out.println("User account deleted successfully.");
+                }
+
+                else
+                {
+                    System.out.println("Invalid option. Please try again.");
                 }
 
             }

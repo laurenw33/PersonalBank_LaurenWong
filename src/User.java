@@ -7,17 +7,30 @@ public class User {
     int[] pinList = {};
 
 
-    public User(String username, int pin)
-    {
-        this.username = username;
-        this.pin = pin;
-        pinList = new int[]{pin};
-        userList = new String[]{username};
+    public User(String username, int pin) {
+        if (String.valueOf(pin).length() == 4) {
+            this.username = username;
+            this.pin = pin;
+            this.balance = 0;
+        }
     }
+
     public String getUsername(String user)
     {
         username = user;
         return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPin(int pin) {
+        if (String.valueOf(pin).length() == 4) {
+            this.pin = pin;
+        } else {
+            throw new IllegalArgumentException("Pin must be exactly four digits.");
+        }
     }
 
     public void getPin(int pinNew)
@@ -75,8 +88,11 @@ public class User {
         else {
             return "Incorrect pin. Access denied.";
         }
-
     }
 
+    public void setBalance(int newBalance)
+    {
+        balance = newBalance;
+    }
 
 }

@@ -21,13 +21,8 @@ public class Admin {
         return pin == enteredPin;
     }
 
-    public String updateBalance(User user, int newBalance) {
-        if (user != null) {
-            user.setBalance(newBalance);
-            return "Balance updated successfully to $" + newBalance;
-        } else {
-            return "Error: User does not exist.";
-        }
+    public void updateBalance(User user, int newBalance) {
+        user.setBalance(newBalance);
     }
 
     public String updatePin(User user, int newPin) {

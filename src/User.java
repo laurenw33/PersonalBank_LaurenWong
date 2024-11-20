@@ -3,10 +3,6 @@ public class User {
     private String username;
     private int pin;
 
-    public User() {
-
-    }
-
     public User(String username, int pin) {
         if (String.valueOf(pin).length() == 4) {
             this.username = username;
@@ -15,12 +11,19 @@ public class User {
         }
     }
 
-    public void setPin(int pin) {
-        if (String.valueOf(pin).length() == 4) {
-            this.pin = pin;
-        } else {
-            throw new IllegalArgumentException("Pin must be exactly four digits.");
-        }
+    public void setPin(int pinNew) {
+        pin = pinNew;
+    }
+
+    public void getPin(int pinNew)
+    {
+        pin = pinNew;
+    }
+
+    public String getUsername(String user)
+    {
+        username = user;
+        return username;
     }
 
 
@@ -29,25 +32,18 @@ public class User {
     }
 
 
-    public String deposit(int deposit, int enteredPin)
+    public String deposit(int deposit)
     {
-        if (verifyPin(enteredPin)) {
-            balance += deposit;
-            return "Your balance after depositing " + deposit + " dollars is: " + balance;
-        }
-
-        else {
-            return "Incorrect pin. Access denied.";
-        }
+       balance += deposit;
+       return "Your balance after depositing " + deposit + " dollars is: " + balance;
     }
 
-    public String withdraw(int withdraw, int enteredPin)
+    public String withdraw(int withdraw)
     {
         if (withdraw <= balance) {
             balance -= withdraw;
             return "Your balance after withdrawing " + withdraw + " dollars is: " + balance;
         }
-
         else {
             return "Insufficient balance. Your current balance is: " + balance;
         }
@@ -63,4 +59,8 @@ public class User {
         return balance;
     }
 
+    public boolean verifyUser(String user)
+    {
+        return username.equals(user);
+    }
 }

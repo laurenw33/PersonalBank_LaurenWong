@@ -4,9 +4,7 @@ public class Runner {
 
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
-        StringStorage users = new StringStorage();
-        StringStorage pins = new StringStorage();
-        User user = new User();
+        User account1 = null;
         Admin admin1 = new Admin("admin1", 8976);
 
         System.out.println("Welcome to your personal banking system!");
@@ -26,35 +24,46 @@ public class Runner {
             System.out.print("Choose an option: ");
             String mode = s.nextLine();
 
+            int pin = 0;
+            String username = null;
             if (mode.equals("1")) {
                 System.out.print("Enter a username: ");
-                String username = s.nextLine();
-
-                int pin;
+                username = s.nextLine();
                 boolean pinValid = false;
+
                 while (!pinValid) {
-                  System.out.print("Enter a 4-digit pin: ");
-                    pin = s.nextInt();
-                    s.nextLine();
+                    System.out.println("How would you like to create your pin? ");
+                    System.out.println("1. Create your own pin");
+                    System.out.println("2. Randomly generate a pin");
+                    System.out.print("Choose an option: ");
+                    String answer = s.nextLine();
 
-                    if (String.valueOf(pin).length() == 4) {
-                    pinValid = true;
-                    } 
+                    if (answer.equals("1")) {
+                        System.out.print("Enter a 4-digit pin: ");
+                        pin = s.nextInt();
+                        s.nextLine();
 
-                    else {
-                        System.out.println("Error! The pin must be exactly 4 digits.");
+                        if (String.valueOf(pin).length() == 4) {
+                            pinValid = true;
+                        } else {
+                            System.out.println("Error! The pin must be exactly 4 digits.");
+                        }
                     }
+
+                    if (answer.equals("2")) {
+                        pin = (int) (10000 * Math.random() + 1);
+                        pinValid = true;
+                        System.out.println("Your randomized pin is: " + pin);
+                    }
+
+                    account1 = new User(username, pin);
                 }
-
-                User newUser = new User(username, pin);
-                users.addUser(username);
-                pins.addPin(pin);
-                System.out.println("Account created successfully for username: " + newUser);
-                System.out.println("-----------------------------------------------------");
-
             }
 
-            else if (mode.equals("2")) {
+                System.out.println("Account created successfully for username: " + username);
+                System.out.println("-----------------------------------------------------");
+
+            if (mode.equals("2")) {
                 System.out.print("Please enter admin username: ");
                 String admin = s.nextLine();
 
@@ -79,23 +88,15 @@ public class Runner {
 
                     if (answer.equals("1")) {
                         System.out.print("Please enter your username to update pin: ");
-                        String username = s.nextLine();
-                        int userIdx = users.findUser(users, username);
-                        String userFind = users.getUser(userIdx);
+                        String username1 = s.nextLine();
+                        boolean userVer = account1.verifyUser(username1);
 
-                        if (userFind.equals(username)) {
+                        if (userVer) {
                             System.out.println("Enter the new pin: ");
                             int newPin = s.nextInt();
                             s.nextLine();
-                            admin1.updatePin(users, newPin);
+                            admin1.updatePin(account1, newPin);
 
-                        }
-
-                        if (user != null) {
-                            System.out.println("Enter the new pin: ");
-                            int newPin = s.nextInt();
-                            s.nextLine();
-                            admin1.updatePin(users, newPin);
                         }
 
                         else {
@@ -107,19 +108,18 @@ public class Runner {
 
                     else if (answer.equals("2")) {
                         System.out.print("Please enter your username to update balance: ");
-                        String username = s.nextLine();
-                        StringStorage user = user.findUser(users, username);
+                        String username2 = s.nextLine();
 
-                        if (user != null) {
+                        if (account1 != null) {
                             System.out.print("Enter the new balance for the user: ");
                             int newBalance = s.nextInt();
                             s.nextLine();
-                            admin1.updateBalance(user, newBalance);
+                            admin1.updateBalance(account1, newBalance);
                         }
                     }
 
                     else if (answer.equals("3")) {
-                        user = null;
+                        account1 = null;
                         System.out.println("User account deleted successfully.");
                     }
 
@@ -133,70 +133,78 @@ public class Runner {
             }
 
             else if (mode.equals("3")) {
+                System.out.print("Please enter your username: ");
+                String username3 = s.nextLine();
+                boolean verifyUser = account1.verifyUser(username3);
 
-                while (true) {
-                    System.out.print("Please enter your username: ");
-                    String username1 = s.nextLine();
-                    int userIdx = users.findUser(users, username1);
-
-                    if (userIdx == -1) {
-                        System.out.println("User not found.");
-                    }
-
+                if (verifyUser) {
                     System.out.print("Please enter your pin: ");
-                    String pin = s.nextLine();
+                    String pin1 = s.nextLine();
+                    boolean verifyPin = account1.verifyPin(Integer.parseInt(pin1));
 
-                    if (pins.getPin(userIdx).equals(pin)) {
-                        System.out.println("Welcome, " + username1);
+                    if (verifyPin) {
+                        System.out.println("Welcome, " + username);
+
+                        while (true) {
+                            System.out.print("Please enter your username: ");
+                            String username1 = s.nextLine();
+                            boolean verify = account1.verifyUser(username1);
+
+                            if (!verify) {
+                                System.out.println("User not found.");
+                            }
+
+                            System.out.print("Please enter your pin: ");
+                            String pin2 = s.nextLine();
+
+                            boolean verifyPin1 = account1.verifyPin(Integer.parseInt(pin2));
+
+                            if (verifyPin1) {
+                                System.out.println("Welcome, " + username1);
 
 
-                        System.out.println("USER MENU");
-                        System.out.print("1. Withdraw");
-                        System.out.println("2. Deposit");
-                        System.out.println("3. Balance");
-                        System.out.println("4. Exit");
-                        System.out.print("Choose an option: ");
-                        String answer = s.nextLine();
+                                System.out.println("USER MENU");
+                                System.out.print("1. Withdraw");
+                                System.out.println("2. Deposit");
+                                System.out.println("3. Balance");
+                                System.out.println("4. Exit");
+                                System.out.print("Choose an option: ");
+                                String answer = s.nextLine();
 
-                        if (answer.equalsIgnoreCase("1")) {
-                            System.out.print("Please enter your withdraw amount: ");
-                            int withdrawAmt = s.nextInt();
-                            System.out.println(user.withdraw(withdrawAmt));
+                                if (answer.equalsIgnoreCase("1")) {
+                                    System.out.print("Please enter your withdraw amount: ");
+                                    int withdrawAmt = s.nextInt();
+                                    System.out.println(account1.withdraw(withdrawAmt));
+                                } else {
+                                    System.out.println("That account does not exist!");
+                                }
+
+
+                                if (answer.equalsIgnoreCase("2")) {
+                                    System.out.print("Please enter your deposit amount: ");
+                                    int depositAmt = s.nextInt();
+                                    System.out.println(account1.deposit(depositAmt));
+                                } else {
+                                    System.out.println("That account does not exist!");
+                                }
+
+
+                                if (answer.equalsIgnoreCase("3")) {
+                                    System.out.println(account1.balance());
+                                }
+
+
+                                if (answer.equalsIgnoreCase("4")) {
+                                    System.out.println("Thank you for using the banking system. Goodbye!");
+                                    break;
+                                }
+
+                                System.out.println("----------------------------------------------------");
+                                s.nextLine();
+                            }
                         }
-
-                        else {
-                            System.out.println("That account does not exist!");
-                        }
-
-
-                        if (answer.equalsIgnoreCase("2")) {
-                            System.out.print("Please enter your deposit amount: ");
-                            int depositAmt = s.nextInt();
-                            System.out.println(user.deposit(depositAmt, newPin));
-                        }
-
-                        else {
-                            System.out.println("That account does not exist!");
-                        }
-
-
-                        if (answer.equalsIgnoreCase("3")) {
-                            System.out.println(user.balance());
-                        }
-
-
-                        if (answer.equalsIgnoreCase("4")) {
-                            System.out.println("Thank you for using the banking system. Goodbye!");
-                            break;
-                        }
-
-                        System.out.println("----------------------------------------------------");
-                        s.nextLine();
                     }
                 }
-
-
-
             }
         }
     }

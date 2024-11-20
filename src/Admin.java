@@ -26,17 +26,11 @@ public class Admin {
     }
 
     public String updatePin(User user, int newPin) {
-        if (user != null) {
-            if (String.valueOf(newPin).length() == 4) {
-                user.setPin(newPin);
-                return "Pin updated successfully to: " + newPin;
-            }
-            else {
-               return "Error: Pin must be exactly four digits.";
-            }
-        }
-        else {
-            return "Error: User does not exist.";
+        if (String.valueOf(newPin).length() == 4) {
+            user.setPin(newPin); // Set pin for the passed user
+            return "Pin updated successfully to: " + newPin;
+        } else {
+            return "Error: Pin must be exactly four digits.";
         }
     }
 

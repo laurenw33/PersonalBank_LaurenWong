@@ -12,6 +12,7 @@ public class Runner {
         System.out.println("ADMIN CREDENTIALS");
         System.out.println("Admin username: admin1");
         System.out.println("Admin password: 8976");
+        System.out.println("IMPORTANT: You must create a new user account!");
         System.out.println("-----------------------------------------------------");
 
         boolean play = true;
@@ -69,17 +70,16 @@ public class Runner {
             else if (mode.equals("2")) {
                 System.out.print("Please enter admin username: ");
                 String admin = s.nextLine();
-
                 if (!admin1.verifyAdmin(admin)) {
                     System.out.println("Incorrect username.");
                 }
-
                 System.out.print("Please enter the admin pin: ");
                 String adminPin = s.nextLine();
                 boolean verify = false;
                 verify = admin1.verifyAdmin(admin) && admin1.verifyPin(Integer.parseInt(adminPin));
 
                 while (verify) {
+                    System.out.println();
                     System.out.println("-----------------------------------------------------");
                     System.out.println("ADMIN MENU");
                     System.out.println("1. Update Pin");
@@ -115,15 +115,20 @@ public class Runner {
                             System.out.print("Enter the new balance for the user: ");
                             int newBalance = s.nextInt();
                             s.nextLine();
-                            admin1.updateBalance(account1, newBalance);
+                            System.out.println(admin1.updateBalance(account1, newBalance));
                         }
                         else {
                             System.out.println("User not found.");
                         }
                     }
                     else if (answer.equals("3")) {
-                        account1 = null;
-                        System.out.println("User account deleted successfully.");
+                        if (account1 != null) {
+                            account1 = null;
+                            System.out.println("User account deleted successfully.");
+                        }
+                        else {
+                            System.out.println("You cannot delete an account that has not been created.");
+                        }
                     }
                     else if (answer.equals("4")) {
                         System.out.println("Exiting Admin Menu...");
@@ -134,7 +139,6 @@ public class Runner {
                     }
                 }
                 System.out.println("----------------------------------------------------");
-                s.nextLine();
             }
 
             else if (mode.equals("3")) {
@@ -193,8 +197,8 @@ public class Runner {
                 }
             }
             else if (mode.equals("4")) {
-                System.out.println("Thank you for using our banking system. Goodbye!");
                 play = false;
+                System.out.println("Thank you for using our banking system. Goodbye!");
             }
         }
     }

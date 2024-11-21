@@ -15,27 +15,25 @@ public class User {
         pin = pinNew;
     }
 
-    public void getPin(int pinNew)
-    {
-        pin = pinNew;
-    }
-
     public String getUsername(String user)
     {
         username = user;
         return username;
     }
 
-
     public boolean verifyPin(int enteredPin) {
         return pin == enteredPin;
     }
 
-
     public String deposit(int deposit)
     {
-       balance += deposit;
-       return "Your balance after depositing " + deposit + " dollars is: $" + balance;
+       if (deposit >= 0) {
+           balance += deposit;
+           return "Your balance after depositing " + deposit + " dollars is: $" + balance;
+       }
+       else {
+           return "You must deposit a positive value!";
+       }
     }
 
     public String withdraw(int withdraw)

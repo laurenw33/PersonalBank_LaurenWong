@@ -35,14 +35,14 @@ public class User {
     public String deposit(int deposit)
     {
        balance += deposit;
-       return "Your balance after depositing " + deposit + " dollars is: " + balance;
+       return "Your balance after depositing " + deposit + " dollars is: $" + balance;
     }
 
     public String withdraw(int withdraw)
     {
         if (withdraw <= balance) {
             balance -= withdraw;
-            return "Your balance after withdrawing " + withdraw + " dollars is: " + balance;
+            return "Your balance after withdrawing " + withdraw + " dollars is: $" + balance;
         }
         else {
             return "Insufficient balance. Your current balance is: " + balance;

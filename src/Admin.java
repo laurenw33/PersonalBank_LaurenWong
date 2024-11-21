@@ -21,8 +21,9 @@ public class Admin {
         return pin == enteredPin;
     }
 
-    public void updateBalance(User user, int newBalance) {
+    public String updateBalance(User user, int newBalance) {
         user.setBalance(newBalance);
+        return "Your new balance is: $" + newBalance;
     }
 
     public String updatePin(User user, int newPin) {

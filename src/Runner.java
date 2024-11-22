@@ -70,13 +70,15 @@ public class Runner {
             else if (mode.equals("2")) {
                 System.out.print("Please enter admin username: ");
                 String admin = s.nextLine();
+                boolean verify = false;
                 if (!admin1.verifyAdmin(admin)) {
                     System.out.println("Incorrect username.");
                 }
-                System.out.print("Please enter the admin pin: ");
-                String adminPin = s.nextLine();
-                boolean verify = false;
-                verify = admin1.verifyAdmin(admin) && admin1.verifyPin(Integer.parseInt(adminPin));
+                else {
+                    System.out.print("Please enter the admin pin: ");
+                    String adminPin = s.nextLine();
+                    verify = admin1.verifyAdmin(admin) && admin1.verifyPin(Integer.parseInt(adminPin));
+                }
 
                 while (verify) {
                     System.out.println();
@@ -100,7 +102,7 @@ public class Runner {
                             int newPin = s.nextInt();
                             s.nextLine();
                             admin1.updatePin(account1, newPin);
-                            System.out.println("Your new pin is: " + newPin);
+                            System.out.println(admin1.updatePin(account1, newPin));
                         }
                         else {
                             System.out.println("User not found.");

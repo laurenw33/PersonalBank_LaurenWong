@@ -22,15 +22,21 @@ public class Admin {
     }
 
     public String updateBalance(User user, int newBalance) {
-        user.setBalance(newBalance);
-        return "Your new balance is: $" + newBalance;
+        if (newBalance >= 0) {
+            user.setBalance(newBalance);
+            return "Your new balance is: $" + newBalance;
+        }
+        else {
+            return "You must enter a positive value!";
+        }
     }
 
     public String updatePin(User user, int newPin) {
         if (String.valueOf(newPin).length() == 4) {
-            user.setPin(newPin); // Set pin for the passed user
+            user.setPin(newPin);
             return "Pin updated successfully to: " + newPin;
-        } else {
+        }
+        else {
             return "Error: Pin must be exactly four digits.";
         }
     }

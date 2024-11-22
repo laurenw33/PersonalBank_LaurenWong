@@ -39,8 +39,13 @@ public class User {
     public String withdraw(int withdraw)
     {
         if (withdraw <= balance) {
-            balance -= withdraw;
-            return "Your balance after withdrawing " + withdraw + " dollars is: $" + balance;
+            if (withdraw >= 0) {
+                balance -= withdraw;
+                return "Your balance after withdrawing " + withdraw + " dollars is: $" + balance;
+            }
+            else {
+                return "You must deposit a positive value!";
+            }
         }
         else {
             return "Insufficient balance. Your current balance is: $" + balance;

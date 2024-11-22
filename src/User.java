@@ -43,13 +43,13 @@ public class User {
             return "Your balance after withdrawing " + withdraw + " dollars is: $" + balance;
         }
         else {
-            return "Insufficient balance. Your current balance is: " + balance;
+            return "Insufficient balance. Your current balance is: $" + balance;
         }
     }
 
     public String balance()
     {
-        return "Your balance is: " + balance;
+        return "Your balance is: $" + balance;
     }
 
     public int setBalance(int balanceNew) {

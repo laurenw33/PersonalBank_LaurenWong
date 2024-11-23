@@ -15,11 +15,6 @@ public class User {
         pin = pinNew;
     }
 
-    public String getUsername(String user)
-    {
-        username = user;
-        return username;
-    }
 
     public boolean verifyPin(int enteredPin) {
         return pin == enteredPin;

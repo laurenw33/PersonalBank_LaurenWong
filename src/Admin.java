@@ -2,11 +2,6 @@ public class Admin {
     private String username;
     private int pin;
 
-    public Admin() {
-        this.username = "admin1";
-        this.pin = 8976;
-    }
-
     public Admin(String username, int pin) {
         this.username = username;
         this.pin = pin;
